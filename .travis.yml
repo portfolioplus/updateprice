@@ -1,0 +1,41 @@
+env:
+  global:
+    - STOCK2FIREBASE_MAX_PROCESSES=6
+    - CRED_JSON=firebase_sdk.json
+    - DATA_ROOT=/
+    - secure: f0GCX02XS9rLOKUHYfoI1UCDhs0ZOkw0UFxdfmjkuo1ptldovl7d1JcVKbIdlvbwck316jkWmQNFi+4kdGQ4fem3LhhKfk/q5fsFshAJjYIt0kib1kym4M5+6RTZaahbzAb5HtBzauOwJeGk3eeIk/3Dznox7ilQZmtVH0F7egM4/7MDjH3EaTlpNxD6Lma8CfxmiKsYyKnarqasB2j4hl6I+bGWhY1B1QIIkC9vfSpl4u561JZjvEM24DYCHE3jP325X8Qrx35L042twE/NitVT8ZesnWSJcAgHafiKKxQFoJQsEof2GayRoem7bj6KF8cuDDOihkyqGTM6P6fe4ukX0nfAp7iQMpgvnEJIkazqIk+g36sJaMABV5y7V1wOff3WJsVesjL5aaKBJHGZPX66+vQqVZyATpWBKOK+y2/Kv1kbRKOSE6Qr09BCJwRXe0Jf1mQ9hgQsfRBpyNnQLmqXE1WSqn1oedrEkwFJeyM+CGwqfvaxAGpUstpyGTX7se1jvYm1JlaL4TpL3Ddo5Fe/X51BHMo82k+DEHQ8pA+QZb7cKiB3GnaZVoDnisPlvhAFGrttQfgjmEGD+AERvPAsUiKJQ8uat/sZDJlm9TE1cSQvPfbDF4DL7zAyU6mFtTyXV8yTcxXO/iheTW/BGg1JZ5cYB7LW8LOQA+PKujg=
+language: python
+matrix:
+  include:
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=0
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=1
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=2
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=3
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=4
+  - os: linux
+    python: 3.6
+    env:
+    - STOCK2FIREBASE_ID=5
+cache: pip
+install:
+- pip install -r requirements.txt
+script:
+- travis_wait 30 stocks -p
+before_install:
+- openssl aes-256-cbc -K $encrypted_548c0a6f5893_key -iv $encrypted_548c0a6f5893_iv
+  -in firebase_sdk.json.enc -out firebase_sdk.json -d
